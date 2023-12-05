@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Usuario } from '../models/usuario.model';
 
 const baseUrl = environment.baseUrl
 
@@ -13,7 +14,19 @@ const baseUrl = environment.baseUrl
 })
 export class UsuarioService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  usuario: Usuario
+
+  constructor(private http: HttpClient, private router: Router) {
+    this.usuario = new Usuario( '', '', '', '', '', false, '', '' )
+  }
+
+  get uid() {
+    return this.usuario.uid ?? ''
+  }
+
+  get token() {
+    return localStorage.getItem('token') || ''
+  }
 
   logout() {
     localStorage.removeItem('token')
@@ -21,11 +34,14 @@ export class UsuarioService {
   }
 
   validarToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || ''
 
-    return this.http.get(`${baseUrl}/login/renew`, { headers: { 'x-token': token }}).pipe(
-      tap((resp: any) => localStorage.setItem('token', resp.token)),
-      map( () => true ),
+    return this.http.get(`${baseUrl}/login/renew`, { headers: { 'x-token': this.token }}).pipe(
+      map((resp: any) => {
+        const { nombre, email, estado, role, google, img, uid } = resp.usuario
+        this.usuario =  new Usuario( nombre, email, estado, '', role, google, img, uid )
+        localStorage.setItem('token', resp.token)
+        return resp.ok
+      }),
       catchError(() => of(false))
     )
   }
@@ -35,6 +51,12 @@ export class UsuarioService {
     return this.http.post(`${baseUrl}/usuarios`, formData).pipe(
       tap(({ token }: any) => localStorage.setItem('token', token))
     )
+  }
+
+  actualizarPerfil( data: { email: string, nombre: string, role: string }) {
+    return this.http.put(`${baseUrl}/usuarios/${this.uid}`, { ...data, role: this.usuario.role }, {
+      headers: { 'x-token': this.token }
+    })
   }
   
   login(formData: LoginForm) {

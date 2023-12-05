@@ -9,3 +9,8 @@
 #themecolors .selector {
     cursor: pointer;
 }
+
+.my-figure .my-img{
+    width: 12rem;
+    height: 15rem;
+}
