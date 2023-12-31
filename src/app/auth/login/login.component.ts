@@ -46,11 +46,9 @@ export class LoginComponent implements AfterViewInit {
   handleCredentialResponse({ credential } : { credential: string }) {
     this.usuarioService.loginGoogle(credential).subscribe({
       next: resp => {
-        console.log('Usuario logueado con google')
         this.zone.run(() => this.router.navigate(['/']));
       },
       error: err => {
-        console.log(err)
         Swal.fire('Error logueando con google', `${err.error.msg}`, 'warning')
       }
     })
@@ -59,11 +57,9 @@ export class LoginComponent implements AfterViewInit {
   login() {
     this.usuarioService.login(this.loginForm.value).subscribe({
       next: resp => {
-        console.log('Usuario logueado')
         this.router.navigate(['/']);
       }, 
       error: err => {
-        console.warn(err)
         Swal.fire('Error logueando usuario', `${err.error.msg}`, 'warning')
       }
     })

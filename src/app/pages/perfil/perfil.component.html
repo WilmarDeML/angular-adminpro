@@ -1,11 +1,10 @@
 <div class="row">
-
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Mi perfil de usuario</h4>
                 <h6 class="card-subtitle">Ajustes</h6>
-                <form [formGroup]="profileForm" (submit)="actualizarPerfil()" class="form p-t-20">
+                <form [formGroup]="profileForm" (submit)="actualizarPerfil()" class="form">
                     <div class="form-group">
                         <label for="exampleInputuname2">User Name</label>
                         <div class="input-group">
@@ -36,12 +35,12 @@
             <div class="card-body">
                 <h4 class="card-title">Avatar</h4>
                 <div class="d-flex flex-column">
-                    <label for="avatar">Imagen del usuario</label>
-                    <figure class="text-center rounded-circle my-figure">
-                        <img [src]="imagenTemporal || usuario.urlImg" alt="Imagen usuario" class="rounded-circle my-img img-thumbnail">
+                    <label for="avatar"><h6 class="card-subtitle">Imagen del usuario</h6></label>
+                    <figure class="text-center">
+                        <img [src]="imagenTemporal || usuario.urlImg" alt="Imagen usuario" class="my-img img-thumbnail">
                     </figure>
                     <input type="file" id="avatar" accept=".jpg, .jpeg, .png" (change)="elegirImagen($event)">
-                    <button type="button" class="btn btn-success waves-effect waves-light mt-3" [disabled]="!imagenTemporal"
+                    <button type="button" class="btn btn-success waves-effect waves-light mt-2" [disabled]="!imagenTemporal"
                         (click)="actualizarImagen()">
                         <i class="fa fa-save"></i>
                         Cambiar imagen 

@@ -10,7 +10,31 @@
     cursor: pointer;
 }
 
-.my-figure .my-img{
-    width: 12rem;
-    height: 15rem;
+.my-img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.my-img-table{
+    width: 3rem;
+    height: 3rem;
+}
+
+caption {
+    caption-side: top;
+    text-align: center;
+}
+
+.selector {
+    cursor: pointer;
+}
+
+.mostrar {
+    display: block;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.h370 {
+    height: 100%;
 }

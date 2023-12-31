@@ -1,0 +1,72 @@
+<div class="animated fadeIn fast">
+    <input type="search" class="form-control" placeholder="Buscar usuario..."
+        (keyup)="buscar(termino.value)" #termino>
+
+    <div *ngIf="cargando" class="alert alert-info mt-3 text-center">
+        <h4 class="alert-heading">Cargando...</h4>
+        <i class="fa fa-spin fa-refresh fa-2x"></i>
+        <p class="mb-0">Un momento por favor...</p>
+    </div>
+    <div *ngIf="!usuarios?.length" class="alert alert-warning mt-3 text-center">
+        <h4 class="alert-heading">No se hallaron usuarios que contengan {{termino.value}}...</h4>
+        <i class="fa fa-spin fa-refresh fa-2x"></i>
+        <p class="mb-0">Intente de nuevo</p>
+    </div>
+</div>
+
+<div *ngIf="usuarios?.length" class="card px-3 my-3 rounded">
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <h4 class="card-title align-self-left">Usuarios</h4>
+        
+        <h4 *ngIf="!termino.value" class="">
+            <button [disabled]="desde === 0" (click)="obtenerUsuarios(-limit)" class="btn btn-secondary mx-3">Anteriores</button>
+            <button [disabled]="desde >= totalUsuarios - limit" (click)="obtenerUsuarios(limit)" class="btn btn-secondary">Siguientes</button>
+        </h4>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <caption *ngIf="!termino.value">{{desde + 1}} - {{desde + usuarios.length}} of {{totalUsuarios}}</caption>
+            <caption *ngIf="termino.value">{{usuarios.length}} of {{totalUsuarios}}</caption>
+            <thead>
+                <tr>
+                    <th class="text-nowrap text-center">Avatar</th>
+                    <th class="text-nowrap text-center">Correo</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Role</th>
+                    <th class="text-center">Auth</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td class="text-nowrap text-center">
+                        <img [src]="usuario.urlImg" alt="Avatar {{usuario.nombre}}" class="my-img-table rounded-circle selector"
+                            (click)="abrirModal(usuario)">
+                    </td>
+                    <td class="text-nowrap text-center pt-4">{{usuario.email}}</td>
+                    <td class="text-nowrap text-center pt-4">{{usuario.nombre}}</td>
+                    <td class="text-nowrap text-center pt-4">
+                        <select class="custom-select custom-select-sm" [(ngModel)]="usuario.role" (change)="cambiarRole(usuario)">
+                            <option value="ADMIN_ROLE">Admin</option>
+                            <option value="USER_ROLE">User</option>
+                        </select>
+                    </td>
+                    <td class="text-nowrap text-center pt-4">
+                        <span class="label label-{{usuario.google ? 'danger' : 'info'}}">
+                            {{usuario.google ? 'Google' : 'Email'}}
+                        </span>
+                    </td>
+                    <td class="text-nowrap text-center pt-4">
+                        <a href="#" data-toggle="tooltip" data-original-title="Editar"> <i
+                                class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                        <a title="Borrar" (click)="eliminar(usuario)" class="selector">
+                            <i class="fa fa-close text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

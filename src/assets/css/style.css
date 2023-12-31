@@ -5713,7 +5713,7 @@ File: scss
   .hdr-nav-bar .call-to-act .custom-select {
     margin-bottom: 10px; }
   .d-flex {
-    display: block !important; }
+    /* display: block !important; } */
     .d-flex.no-block {
       display: -webkit-box !important;
       display: -webkit-flex !important;

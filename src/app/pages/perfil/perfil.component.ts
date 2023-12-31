@@ -14,8 +14,8 @@ export class PerfilComponent {
 
   profileForm: FormGroup
   usuario: Usuario
-  imagenNueva!: File | undefined
-  imagenTemporal: string | undefined
+  imagenNueva!: File 
+  imagenTemporal?: string
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private fileUploadService: FileUploadService) {
     this.usuario = usuarioService.usuario

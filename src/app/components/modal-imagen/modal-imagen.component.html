@@ -1,0 +1,27 @@
+<div class="modal fadeIn" id="modal" tabindex="-1" role="dialog" [class.mostrar]="modalImagenService.esMostrarModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Cargar imagen</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true" (click)="cerrarModal()">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Selecccione una imagen</label>
+                        <figure class="text-center">
+                            <img [src]="imagenTemporal || modalImagenService.img" alt="Imagen usuario" class="my-img img-thumbnail">
+                        </figure>
+                        <input type="file" id="avatar" accept=".jpg, .jpeg, .png" class="form-control"
+                            (change)="elegirImagen($event)">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cerrarModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="actualizarImagen()" [disabled]="!imagenTemporal">Actualizar imagen</button>
+            </div>
+        </div>
+    </div>
+</div>

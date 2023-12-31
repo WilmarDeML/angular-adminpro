@@ -28,14 +28,11 @@ export class RegisterComponent {
   crearUsuario() {
     this.formSubmitted = true
     this.registerForm.valid
-    ? this.usuarioService.crearUsuario(this.registerForm.value).subscribe(resp => {
-        console.log('Usuario creado')
-        console.log(resp)
-        this.router.navigate(['/']);
-      }, err => {
-        Swal.fire('Error creando usuario', `${err.error.msg}`, 'warning')
+    ? this.usuarioService.crearUsuario(this.registerForm.value).subscribe({
+        next: () => this.router.navigate(['/']), 
+        error: err => Swal.fire('Error creando usuario', `${err.error.msg}`, 'warning')
       })
-    : console.log('Error en formulario')
+    : Swal.fire('Error en formulario', undefined, 'error')
   }
 
   campoNoValido(campo: string): boolean | undefined | null {
