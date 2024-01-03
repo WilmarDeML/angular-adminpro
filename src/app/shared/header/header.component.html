@@ -154,7 +154,7 @@
                                     <!-- Message -->
                                     <a href="#">
                                         <div class="user-img">
-                                            <img [src]="usuario.urlImg" alt="user" class="img-circle" />
+                                            <img [src]="usuario.img | imagen: 'usuarios'" alt="user" class="img-circle" />
                                             <span class="profile-status online pull-right"></span>
                                         </div>
                                         <div class="mail-contnet">
@@ -388,14 +388,14 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img [src]="usuario.urlImg" alt="user"
+                        aria-haspopup="true" aria-expanded="false"><img [src]="usuario.img | imagen: 'usuarios'" alt="user"
                             class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated zoomIn fast">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box text-truncate">
                                     <div class="u-img">
-                                        <img [src]="usuario.urlImg" alt="user" />
+                                        <img [src]="usuario.img | imagen: 'usuarios'" alt="user" />
                                     </div>
                                     <div class="u-text">
                                         <h4>{{usuario.nombre}}</h4>

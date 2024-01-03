@@ -16,6 +16,12 @@
     height: 150px;
 }
 
+.my-img-2 {
+    border-radius: 5%;
+    width: 200px;
+    height: 200px;
+}
+
 .my-img-table{
     width: 3rem;
     height: 3rem;

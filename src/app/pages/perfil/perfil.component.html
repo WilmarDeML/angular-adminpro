@@ -37,7 +37,8 @@
                 <div class="d-flex flex-column">
                     <label for="avatar"><h6 class="card-subtitle">Imagen del usuario</h6></label>
                     <figure class="text-center">
-                        <img [src]="imagenTemporal || usuario.urlImg" alt="Imagen usuario" class="my-img img-thumbnail">
+                        <img [src]="imagenTemporal || usuario.img | imagen: 'usuarios'" alt="Imagen usuario" 
+                            class="my-img img-thumbnail">
                     </figure>
                     <input type="file" id="avatar" accept=".jpg, .jpeg, .png" (change)="elegirImagen($event)">
                     <button type="button" class="btn btn-success waves-effect waves-light mt-2" [disabled]="!imagenTemporal"

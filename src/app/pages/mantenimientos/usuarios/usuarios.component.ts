@@ -62,7 +62,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     } else {
       this.cargando = true
       this.busquedaService.buscar('usuarios', termino).subscribe({
-        next: (users: [any]) => {
+        next: (users: [Usuario]) => {
           this.cargando = false
           this.usuarios = users
         },
@@ -85,8 +85,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: '¡Sí, eliminarlo!'
-    }).then((result) => {
-      if (result.isConfirmed) {
+    }).then(({ isConfirmed }) => {
+      if (isConfirmed) {
         this.usuariosService.eliminarUsuario(usuario.uid).subscribe({
           next: ({ ok, usuario, msg }) => {
             if (ok) {

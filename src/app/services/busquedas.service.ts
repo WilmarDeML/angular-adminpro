@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../models/usuario.model';
+import { Hospital } from '../models/hospital.model';
 
 const baseUrl = environment.baseUrl
 
@@ -28,9 +29,9 @@ export class BusquedasService {
           case 'usuarios':
             return resultados.map((user: Usuario) => {
               return new Usuario(user.nombre, user.email, user.estado, undefined, user.role, user.google, user.img, user.uid)
-            })        
+            })
           default:
-            break;
+            return resultados;
         }
       })
     )

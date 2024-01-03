@@ -1,0 +1,64 @@
+<div class="row animated fadeIn fast">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{title}}</h4>
+                <h6 class="card-subtitle">Información del médico</h6>
+                <form class="form-horizontal p-t-20 floating-labels" [formGroup]="medicoForm"
+                    (submit)="guardarMedico()">
+                    <div *ngIf="medicoActual" class="form-group row animated fadeIn fast">
+                        <label class="col-sm-3 control-label">Foto</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-image"></i></div>
+                                <figure class="text-center selector form-control" (click)="abrirModal(medicoActual)">
+                                    <img [src]="medicoActual.img | imagen: 'medicos'" alt="Imagen usuario" class="my-img img-thumbnail mx-auto">
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="nombre" class="col-sm-3 control-label">Nombre</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="hospital" class="col-sm-3 control-label">Hospital</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-list"></i></div>
+                                <select class="form-control" formControlName="hospital" id="hospital" placeholder="Hospital">
+                                    <option value="">Seleccione un hospital</option>
+                                    <option [value]="hospital.hid" *ngFor="let hospital of hospitales" def>{{hospital.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-0">
+                        <div class="offset-sm-3 col-sm-9 mx-auto">
+                            <button type="submit" class="btn btn-success waves-effect waves-light w-100"
+                                [disabled]="medicoForm.invalid">
+                                <i class="ti-save"></i> <span class="ml-2">Guardar cambios</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="hospitalSeleccionado" class="col-md-6 animated fadeIn fast">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hospital</h4>
+                <h6 class="card-subtitle">{{hospitalSeleccionado.nombre}}</h6>
+                <figure class="text-center">
+                    <img [src]="hospitalSeleccionado.img | imagen: 'hospitales'" alt="Imagen usuario" class="my-img-2 img-thumbnail">
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>
